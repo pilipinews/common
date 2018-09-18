@@ -5,6 +5,7 @@ namespace Pilipinews\Common\Fixture;
 use Pilipinews\Common\Article;
 use Pilipinews\Common\Client;
 use Pilipinews\Common\Scraper;
+use Pilipinews\Common\Interfaces\ScraperInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
@@ -13,7 +14,7 @@ use Symfony\Component\DomCrawler\Crawler;
  * @package Pilipinews
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
-class CnnScraper extends Scraper
+class CnnScraper extends Scraper implements ScraperInterface
 {
     /**
      * @var string[]
@@ -31,31 +32,16 @@ class CnnScraper extends Scraper
     );
 
     /**
-     * Initializes the scraper instance.
-     *
-     * @param string $link
-     */
-    public function __construct($link)
-    {
-        $pattern = '/content-body-[0-9]+(-[0-9]+)+/i';
-
-        $html = Client::request($link);
-
-        preg_match($pattern, $html, $matches);
-
-        $html = str_replace($matches[0], 'content-body', $html);
-
-        $this->crawler = new Crawler($html);
-    }
-
-    /**
      * Returns the contents of an article.
      *
+     * @param  string $link
      * @return \Pilipinews\Common\Article
      */
-    public function scrape()
+    public function scrape($link)
     {
-        $this->remove((array) $this->removables);
+        $this->prepare((string) $link);
+
+        $this->remove($this->removables);
 
         $title = $this->title('title', ' - CNN Philippines');
 
@@ -72,6 +58,25 @@ class CnnScraper extends Scraper
         $html = preg_replace($search, $replace, $html);
 
         return new Article($title, (string) $html);
+    }
+
+    /**
+     * Initializes the crawler instance.
+     *
+     * @param  string $link
+     * @return void
+     */
+    protected function prepare($link)
+    {
+        $pattern = '/content-body-[0-9]+(-[0-9]+)+/i';
+
+        $html = Client::request($link);
+
+        preg_match($pattern, $html, $matches);
+
+        $html = str_replace($matches[0], 'content-body', $html);
+
+        $this->crawler = new Crawler($html);
     }
 
     /**

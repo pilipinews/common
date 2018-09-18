@@ -4,6 +4,7 @@ namespace Pilipinews\Common\Fixture;
 
 use Pilipinews\Common\Article;
 use Pilipinews\Common\Scraper;
+use Pilipinews\Common\Interfaces\ScraperInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
@@ -12,7 +13,7 @@ use Symfony\Component\DomCrawler\Crawler;
  * @package Pilipinews
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
-class SunstarScraper extends Scraper
+class SunstarScraper extends Scraper implements ScraperInterface
 {
     /**
      * @var string[]
@@ -27,10 +28,13 @@ class SunstarScraper extends Scraper
     /**
      * Returns the contents of an article.
      *
+     * @param  string $link
      * @return \Pilipinews\Common\Article
      */
-    public function scrape()
+    public function scrape($link)
     {
+        $this->prepare((string) $link);
+
         $title = $this->title('title', ' - SUNSTAR');
 
         $this->remove($this->removables);
@@ -48,7 +52,7 @@ class SunstarScraper extends Scraper
      * @param  string $element
      * @return \Symfony\Component\DomCrawler\Crawler
      */
-    public function body($element)
+    protected function body($element)
     {
         return $this->crawler->filter($element)->last();
     }
@@ -59,7 +63,7 @@ class SunstarScraper extends Scraper
      * @param  \Symfony\Component\DomCrawler\Crawler $crawler
      * @return \Symfony\Component\DomCrawler\Crawler
      */
-    public function video(Crawler $crawler)
+    protected function video(Crawler $crawler)
     {
         $callback = function (Crawler $crawler) {
             $link = trim($crawler->attr('data-href'));
