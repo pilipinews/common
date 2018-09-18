@@ -13,7 +13,8 @@ interface ScraperInterface
     /**
      * Returns the contents of an article.
      *
+     * @param  string $link
      * @return \Pilipinews\Common\Article
      */
-    public function scrape();
+    public function scrape($link);
 }

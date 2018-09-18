@@ -18,54 +18,18 @@ abstract class Scraper
     protected $crawler;
 
     /**
-     * Initializes the scraper instance.
-     *
-     * @param string $link
-     */
-    public function __construct($link)
-    {
-        $response = Client::request((string) $link);
-
-        $this->crawler = new Crawler($response);
-    }
-
-    /**
-     * Removes specified HTML tags from body.
-     *
-     * @param  string[] $elements
-     * @return void
-     */
-    public function remove($elements)
-    {
-        $callback = function ($crawler) {
-            $node = $crawler->getNode((integer) 0);
-
-            $node->parentNode->removeChild($node);
-        };
-
-        foreach ((array) $elements as $removable) {
-            $this->crawler->filter($removable)->each($callback);
-        }
-    }
-
-    /**
-     * Returns the title text based from given HTML tag.
+     * Returns the article content based on a given element.
      *
      * @param  string $element
-     * @param  string $removable
-     * @return string
+     * @return \Symfony\Component\DomCrawler\Crawler
      */
-    public function title($element, $removable = '')
+    protected function body($element)
     {
-        $converter = new Converter;
+        $body = $this->crawler->filter($element)->first()->html();
 
-        $crawler = $this->crawler->filter($element);
+        $body = trim(preg_replace('/\s+/', ' ', $body));
 
-        $html = $crawler->first()->html();
-
-        $html = str_replace($removable, '', $html);
-
-        return $converter->convert((string) $html);
+        return new Crawler(str_replace('  ', ' ', trim($body)));
     }
 
     /**
@@ -75,7 +39,7 @@ abstract class Scraper
      * @param  string[]                              $removables
      * @return string
      */
-    public function html(Crawler $crawler, $removables = array())
+    protected function html(Crawler $crawler, $removables = array())
     {
         $converter = new Converter;
 
@@ -91,18 +55,35 @@ abstract class Scraper
     }
 
     /**
-     * Returns the article content based on a given element.
+     * Initializes the crawler instance.
      *
-     * @param  string $element
-     * @return \Symfony\Component\DomCrawler\Crawler
+     * @param  string $link
+     * @return void
      */
-    public function body($element)
+    protected function prepare($link)
     {
-        $body = $this->crawler->filter($element)->first()->html();
+        $response = Client::request((string) $link);
 
-        $body = trim(preg_replace('/\s+/', ' ', $body));
+        $this->crawler = new Crawler($response);
+    }
 
-        return new Crawler(str_replace('  ', ' ', trim($body)));
+    /**
+     * Removes specified HTML tags from body.
+     *
+     * @param  string[] $elements
+     * @return void
+     */
+    protected function remove($elements)
+    {
+        $callback = function ($crawler) {
+            $node = $crawler->getNode((integer) 0);
+
+            $node->parentNode->removeChild($node);
+        };
+
+        foreach ((array) $elements as $removable) {
+            $this->crawler->filter($removable)->each($callback);
+        }
     }
 
     /**
@@ -113,7 +94,7 @@ abstract class Scraper
      * @param  callable                              $callback
      * @return \Symfony\Component\DomCrawler\Crawler
      */
-    public function replace(Crawler $crawler, $element, $callback)
+    protected function replace(Crawler $crawler, $element, $callback)
     {
         $function = function (Crawler $crawler) use ($callback) {
             $node = $crawler->getNode(0);
@@ -137,19 +118,43 @@ abstract class Scraper
     }
 
     /**
+     * Returns the title text based from given HTML tag.
+     *
+     * @param  string $element
+     * @param  string $removable
+     * @return string
+     */
+    protected function title($element, $removable = '')
+    {
+        $converter = new Converter;
+
+        $crawler = $this->crawler->filter($element);
+
+        $html = $crawler->first()->html();
+
+        $html = str_replace($removable, '', $html);
+
+        return $converter->convert((string) $html);
+    }
+
+    /**
      * Parses embedded Twitter tweet in the HTML.
      *
      * @param  \Symfony\Component\DomCrawler\Crawler $crawler
      * @return \Symfony\Component\DomCrawler\Crawler
      */
-    public function tweet(Crawler $crawler)
+    protected function tweet(Crawler $crawler)
     {
         $callback = function (Crawler $crawler) {
-            $text = str_replace('📸: ', '', $crawler->text());
+            $parsed = (string) $crawler->text();
 
-            return (string) '<p>TWEET: ' . $text . '</p>';
+            $text = str_replace('📸: ', '', $parsed);
+
+            return '<p>TWEET: ' . $text . '</p>';
         };
 
-        return $this->replace($crawler, '.twitter-tweet', $callback);
+        $class = '.twitter-tweet';
+
+        return $this->replace($crawler, $class, $callback);
     }
 }
