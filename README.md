@@ -7,7 +7,7 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-Common tools for the [Pilipinews](https://pilipinews.github.io/) package.
+Abstractions and interfaces for [Pilipinews](https://pilipinews.github.io/) packages.
 
 ## Install
 
@@ -16,10 +16,6 @@ Install Common via [Composer](https://getcomposer.org):
 ``` bash
 $ composer require pilipinews/common
 ```
-
-## Usage
-
-Coming soon.
 
 ## Change Log
 
@@ -30,10 +26,6 @@ Please see [CHANGELOG][link-changelog] for more information what has changed rec
 ``` bash
 $ composer test
 ```
-
-## Security
-
-If you discover any security related issues, please email rougingutib@gmail.com instead of using the issue tracker.
 
 ## Credits
 
