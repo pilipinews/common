@@ -28,7 +28,9 @@ class ScraperTest extends \PHPUnit_Framework_TestCase
 
         $article = $scraper->scrape($link);
 
-        $result = $article->body();
+        $result = (string) $article->body();
+
+        echo json_encode($result) . PHP_EOL;
 
         $this->assertEquals($expected, $result);
     }
@@ -48,7 +50,9 @@ class ScraperTest extends \PHPUnit_Framework_TestCase
 
         $article = $scraper->scrape($link);
 
-        $result = $article->body();
+        $result = (string) $article->body();
+
+        echo json_encode($result) . PHP_EOL;
 
         $this->assertEquals($expected, $result);
     }
