@@ -21,6 +21,10 @@ use Pilipinews\Common\Converters\LinkConverter;
 use Pilipinews\Common\Converters\ListBlockConverter;
 use Pilipinews\Common\Converters\ListItemConverter;
 use Pilipinews\Common\Converters\ParagraphConverter;
+use Pilipinews\Common\Converters\TableBlockConverter;
+use Pilipinews\Common\Converters\TableDataConverter;
+use Pilipinews\Common\Converters\TableHeadingConverter;
+use Pilipinews\Common\Converters\TableRowConverter;
 
 /**
  * Converter
@@ -52,6 +56,10 @@ class Converter extends HtmlConverter
         $environment->addConverter(new ParagraphConverter);
         $environment->addConverter(new PreformattedConverter);
         $environment->addConverter(new TextConverter);
+        $environment->addConverter(new TableBlockConverter);
+        $environment->addConverter(new TableDataConverter);
+        $environment->addConverter(new TableHeadingConverter);
+        $environment->addConverter(new TableRowConverter);
 
         $environment->getConfig()->setOption('bold_style', '');
         $environment->getConfig()->setOption('header_style', 'atx');
