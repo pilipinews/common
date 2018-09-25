@@ -26,17 +26,18 @@ class BlockquoteConverter implements ConverterInterface
 
         $markdown = '';
 
-        $quote_content = trim($element->getValue());
+        $quote = trim($element->getValue());
 
-        $lines = preg_split('/\r\n|\r|\n/', $quote_content);
+        $lines = preg_split('/\r\n|\r|\n/', $quote);
 
-        $total_lines = count($lines);
+        $total = count((array) $lines);
 
         foreach ($lines as $i => $line) {
             $markdown .= '> ' . $line . "\n";
-            if ($i + 1 === $total_lines) {
-                $markdown .= "\n";
-            }
+
+            $newline = $i + 1 === $total;
+
+            $newline && $markdown .= "\n";
         }
 
         return "\n\n" . $markdown;

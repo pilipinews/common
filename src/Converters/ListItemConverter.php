@@ -34,10 +34,12 @@ class ListItemConverter implements ConverterInterface
         // If list item is the first in a nested list, add a newline before it
         $prefix = '';
 
-        if ($level > 0 && $element->getSiblingPosition() === 1) $prefix = "\n";
+        if ($level > 0 && $element->getSiblingPosition() === 1) {
+            $prefix = "\n";
+        }
 
         if ($list_type === 'ol') {
-            $number = $element->getSiblingPosition();
+            $number = (string) $element->getSiblingPosition();
 
             return $prefix . $number . '. ' . $value . "\n";
         }
