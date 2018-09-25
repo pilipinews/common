@@ -27,7 +27,7 @@ abstract class Scraper
     {
         $body = $this->crawler->filter($element)->first();
 
-        $charset = 'ISO-8859-1//TRANSLIT//IGNORE';
+        $charset = (string) 'ASCII//TRANSLIT//IGNORE';
 
         $body = iconv('UTF-8', $charset, $body->html());
 
