@@ -35,9 +35,9 @@ abstract class Scraper
 
         $encoded = str_replace(' --', ' -', $encoded);
 
-        $body = preg_replace('/\s+/', ' ', (string) $body);
+        $body = trim(preg_replace('/\s+/', ' ', $encoded));
 
-        return new Crawler(str_replace('  ', ' ', trim($body)));
+        return new Crawler(str_replace('  ', ' ', $body));
     }
 
     /**
