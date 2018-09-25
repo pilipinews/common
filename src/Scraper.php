@@ -29,15 +29,15 @@ abstract class Scraper
 
         $charset = (string) 'ASCII//TRANSLIT//IGNORE';
 
-        $body = iconv(mb_detect_encoding($body), $charset, $body);
+        $encoded = iconv(mb_detect_encoding($body), $charset, $body);
 
-        $body = str_replace(' -- ', ' - ', $body);
+        $encoded = str_replace('-- ', '- ', $encoded);
 
-        $body = str_replace('-- ', '- ', $body);
+        $encoded = str_replace(' --', ' -', $encoded);
 
-        $body = trim(preg_replace('/\s+/', ' ', $body));
+        $body = preg_replace('/\s+/', ' ', (string) $body);
 
-        return new Crawler(str_replace('  ', ' ', $body));
+        return new Crawler(str_replace('  ', ' ', trim($body)));
     }
 
     /**
