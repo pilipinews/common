@@ -25,11 +25,15 @@ abstract class Scraper
      */
     protected function body($element)
     {
-        $body = $this->crawler->filter($element)->first();
+        $body = $this->crawler->filter($element)->first()->html();
 
         $charset = (string) 'ASCII//TRANSLIT//IGNORE';
 
-        $body = iconv('UTF-8', $charset, $body->html());
+        $body = iconv(mb_detect_encoding($body), $charset, $body);
+
+        $body = str_replace(' -- ', ' - ', $body);
+
+        $body = str_replace('-- ', '- ', $body);
 
         $body = trim(preg_replace('/\s+/', ' ', $body));
 
