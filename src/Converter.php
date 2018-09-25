@@ -23,7 +23,6 @@ use Pilipinews\Common\Converters\ListItemConverter;
 use Pilipinews\Common\Converters\ParagraphConverter;
 use Pilipinews\Common\Converters\TableBlockConverter;
 use Pilipinews\Common\Converters\TableDataConverter;
-use Pilipinews\Common\Converters\TableHeadingConverter;
 use Pilipinews\Common\Converters\TableRowConverter;
 
 /**
@@ -58,7 +57,6 @@ class Converter extends HtmlConverter
         $environment->addConverter(new TextConverter);
         $environment->addConverter(new TableBlockConverter);
         $environment->addConverter(new TableDataConverter);
-        $environment->addConverter(new TableHeadingConverter);
         $environment->addConverter(new TableRowConverter);
 
         $environment->getConfig()->setOption('bold_style', '');
@@ -92,6 +90,7 @@ class Converter extends HtmlConverter
         $html = str_replace('???? ', '', $html);
         $html = str_replace('•', '*', $html);
         $html = str_replace("\n\n\n", "\n\n", $html);
+        $html = str_replace("\n ", "\n", $html);
 
         return str_replace('\.', '.', $html);
     }

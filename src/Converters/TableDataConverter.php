@@ -15,7 +15,7 @@ class TableDataConverter implements ConverterInterface
      */
     public function convert(ElementInterface $element)
     {
-        return $element->getValue();
+        return trim($element->getValue());
     }
 
     /**

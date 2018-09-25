@@ -20,9 +20,9 @@ class TableRowConverter implements ConverterInterface
         foreach ($element->getChildren() as $item) {
             $value = str_replace("\n", ' ', $item->getValue());
 
-            if ($value == ' ' || empty($value) || $value == null) continue;
+            $null = $value === ' ' || empty($value);
 
-            array_push($children, trim($value));
+            $null === false && array_push($children, $value);
         }
 
         return implode(' - ', $children) . "\n";

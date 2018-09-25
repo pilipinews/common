@@ -15,7 +15,15 @@ class TableBlockConverter implements ConverterInterface
      */
     public function convert(ElementInterface $element)
     {
-        return "\n" . $element->getValue();
+        $lines = explode("\n", $element->getValue());
+
+        foreach ($lines as $key => $line) {
+            $lines[$key] = trim($lines[$key]);
+        }
+
+        $lines = array_filter($lines);
+
+        return "\n" . implode("\n", (array) $lines);
     }
 
     /**
