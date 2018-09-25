@@ -17,10 +17,8 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testRequestMethod()
     {
-        $html = Client::request('https://news.abs-cbn.com/');
+        $html = Client::request('http://cnnphilippines.com/');
 
-        file_put_contents('test.txt', $html);
-
-        $this->assertTrue(strpos($html, 'ABS-CBN') !== false);
+        $this->assertTrue(strpos($html, 'CNN Philippines') !== false);
     }
 }
