@@ -79,7 +79,7 @@ class EmphasisConverter implements ConverterInterface, ConfigurationAwareInterfa
 
         preg_match($regex, $string, $matches);
 
-        return isset($matches[0]) === true; 
+        return isset($matches[0]) === true;
     }
 
     /**
