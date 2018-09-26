@@ -22,29 +22,25 @@ class ListItemConverter implements ConverterInterface
     public function convert(ElementInterface $element)
     {
         // If parent is an ol, use numbers, otherwise, use dashes
-        $list_type = $element->getParent()->getTagName();
+        $tagname = $element->getParent()->getTagName();
 
         // Add spaces to start for nested list items
         $level = $element->getListItemLevel($element);
 
-        $prefixForParagraph = str_repeat('  ', $level + 1);
+        $items = explode("\n", trim($element->getValue()));
 
-        $value = trim(implode("\n" . $prefixForParagraph, explode("\n", trim($element->getValue()))));
+        $paragraphPrefix = str_repeat('  ', $level + 1);
+
+        $value = implode("\n" . $paragraphPrefix, $items);
+
+        $number = (integer) $element->getSiblingPosition();
 
         // If list item is the first in a nested list, add a newline before it
-        $prefix = '';
+        $prefix = $level > 0 && $number === 1 ? "\n" : '';
 
-        if ($level > 0 && $element->getSiblingPosition() === 1) {
-            $prefix = "\n";
-        }
+        $position = $tagname === 'ol' ? $number . '. ' : '* ';
 
-        if ($list_type === 'ol') {
-            $number = (string) $element->getSiblingPosition();
-
-            return $prefix . $number . '. ' . $value . "\n";
-        }
-
-        return $prefix . '* ' . $value . "\n";
+        return $prefix . $position . trim($value) . "\n";
     }
 
     /**
