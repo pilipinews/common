@@ -2,10 +2,8 @@
 
 namespace Pilipinews\Common;
 
-use Symfony\Component\DomCrawler\Crawler;
-
 /**
- * Abstract Scraper
+ * Scraper
  *
  * @package Pilipinews
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
@@ -13,7 +11,7 @@ use Symfony\Component\DomCrawler\Crawler;
 abstract class Scraper
 {
     /**
-     * @var \Symfony\Component\DomCrawler\Crawler
+     * @var \Pilipinews\Common\Crawler
      */
     protected $crawler;
 
@@ -21,15 +19,11 @@ abstract class Scraper
      * Returns the article content based on a given element.
      *
      * @param  string $element
-     * @return \Symfony\Component\DomCrawler\Crawler
+     * @return \Pilipinews\Common\Crawler
      */
     protected function body($element)
     {
         $body = $this->crawler->filter($element)->first()->html();
-
-        $charset = (string) 'ASCII//TRANSLIT//IGNORE';
-
-        $body = iconv(mb_detect_encoding($body), $charset, $body);
 
         $body = trim(preg_replace('/\s+/', ' ', $body));
 
@@ -39,8 +33,8 @@ abstract class Scraper
     /**
      * Returns the HTML format of the body from the crawler.
      *
-     * @param  \Symfony\Component\DomCrawler\Crawler $crawler
-     * @param  string[]                              $removables
+     * @param  \Pilipinews\Common\Crawler $crawler
+     * @param  string[]                   $removables
      * @return string
      */
     protected function html(Crawler $crawler, $removables = array())
@@ -93,10 +87,10 @@ abstract class Scraper
     /**
      * Replaces a specified HTML tag based from the given callback.
      *
-     * @param  \Symfony\Component\DomCrawler\Crawler $crawler
-     * @param  string                                $element
-     * @param  callable                              $callback
-     * @return \Symfony\Component\DomCrawler\Crawler
+     * @param  \Pilipinews\Common\Crawler $crawler
+     * @param  string                     $element
+     * @param  callable                   $callback
+     * @return \Pilipinews\Common\Crawler
      */
     protected function replace(Crawler $crawler, $element, $callback)
     {
@@ -144,8 +138,8 @@ abstract class Scraper
     /**
      * Parses embedded Twitter tweet in the HTML.
      *
-     * @param  \Symfony\Component\DomCrawler\Crawler $crawler
-     * @return \Symfony\Component\DomCrawler\Crawler
+     * @param  \Pilipinews\Common\Crawler $crawler
+     * @return \Pilipinews\Common\Crawler
      */
     protected function tweet(Crawler $crawler)
     {

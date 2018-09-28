@@ -30,9 +30,9 @@ class ArticleTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->body = 'Lorem ipsum dolor sit amet';
+        $this->body = 'Lorem ipsum dolor sit amet ñunez';
 
-        $this->title = 'Hello World';
+        $this->title = 'Hello World Juañito';
 
         $this->article = new Article($this->title, $this->body);
     }
@@ -74,7 +74,7 @@ class ArticleTest extends \PHPUnit_Framework_TestCase
     {
         $result = $this->article->post();
 
-        $expected = strtoupper($this->title);
+        $expected = mb_strtoupper($this->title, 'UTF-8');
 
         $expected .= "\n\n" . $this->body;
 

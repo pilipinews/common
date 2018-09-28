@@ -50,7 +50,7 @@ class Article
      */
     public function post()
     {
-        return mb_strtoupper($this->title) . "\n\n" . $this->body;
+        return mb_strtoupper($this->title, 'UTF-8') . "\n\n" . $this->body;
     }
 
     /**
