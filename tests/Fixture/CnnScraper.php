@@ -4,8 +4,8 @@ namespace Pilipinews\Common\Fixture;
 
 use Pilipinews\Common\Article;
 use Pilipinews\Common\Client;
-use Pilipinews\Common\Scraper;
 use Pilipinews\Common\Interfaces\ScraperInterface;
+use Pilipinews\Common\Scraper;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**

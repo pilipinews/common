@@ -27,8 +27,6 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
 
         $result = $converter->convert($contents);
 
-        file_put_contents('result.txt', $result);
-
         $this->assertEquals($expected, $result);
     }
 }

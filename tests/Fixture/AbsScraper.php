@@ -5,7 +5,7 @@ namespace Pilipinews\Common\Fixture;
 use Pilipinews\Common\Article;
 use Pilipinews\Common\Crawler;
 use Pilipinews\Common\Interfaces\ScraperInterface;
-use Pilipinews\Common\Scraper as AbstractScraper;
+use Pilipinews\Common\Scraper;
 
 /**
  * ABS-CBN News Scraper
@@ -13,7 +13,7 @@ use Pilipinews\Common\Scraper as AbstractScraper;
  * @package Pilipinews
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
-class AbsScraper extends AbstractScraper implements ScraperInterface
+class AbsScraper extends Scraper implements ScraperInterface
 {
     /**
      * @var string[]

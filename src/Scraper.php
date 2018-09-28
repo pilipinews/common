@@ -46,7 +46,7 @@ abstract class Scraper
         foreach ((array) $removables as $keyword) {
             $html = str_replace($keyword, '', $html);
 
-            $html = str_replace("\n\n\n", '', $html);
+            $html = str_replace("\n\n\n\n", '', $html);
         }
 
         return trim(preg_replace('/\s\s+/', "\n\n", $html));
@@ -61,6 +61,8 @@ abstract class Scraper
     protected function prepare($link)
     {
         $response = Client::request((string) $link);
+
+        $response = str_replace('<strong> </strong>', ' ', $response);
 
         $this->crawler = new Crawler($response);
     }
