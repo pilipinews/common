@@ -79,19 +79,42 @@ class Converter extends HtmlConverter
     {
         $html = parent::convert((string) $html);
 
-        $html = str_replace(array('\[', '\]'), array('[', ']'), $html);
-        $html = str_replace(array('“', '”'), '"', $html);
-        $html = str_replace(array('’', '‘'), '\'', $html);
-        $html = str_replace('…', '...', $html);
-        $html = str_replace('\*', '*', $html);
-        $html = str_replace(array('\-', '—', '–'), '-', $html);
-        $html = str_replace('\#', '#', $html);
-        $html = str_replace('\_', '_', $html);
-        $html = str_replace('???? ', '', $html);
-        $html = str_replace('•', '*', $html);
-        $html = str_replace("\n\n\n", "\n\n", $html);
-        $html = str_replace("\n ", "\n", $html);
+        $html = $this->encode('--', '-', $html, false);
+        $html = $this->encode('\#', '#', $html);
+        $html = $this->encode('\*', '*', $html);
+        $html = $this->encode('\_', '_', $html);
+        $html = $this->encode('•', '*', $html);
+        $html = $this->encode('…', '...', $html);
 
-        return str_replace('\.', '.', $html);
+        $html = $this->encode('\[', '[', $html);
+        $html = $this->encode('\]', ']', $html);
+        $html = str_replace(array('“', '”'), '"', $html);
+        $html = str_replace(array('’', '‘'), "'", $html);
+        $html = str_replace("\n\n\n", "\n\n", $html);
+        $html = str_replace("\n ", "\n", (string) $html);
+
+        return str_replace('\.', '.', (string) $html);
+    }
+
+    /**
+     * Converts the specified string.
+     *
+     * @param  string  $from
+     * @param  string  $text
+     * @param  string  $html
+     * @param  boolean $whole
+     * @return string
+     */
+    protected function encode($from, $text, $html, $whole = true)
+    {
+        $html = str_replace($from . ' ', $text . ' ', $html);
+
+        $html = str_replace(' ' . $from, ' ' . $text, $html);
+
+        $html = str_replace('>' . $from, '>' . $text, $html);
+
+        $html = str_replace($from . '<', $text . '<', $html);
+
+        return $whole ? str_replace($from, $text, $html) : $html;
     }
 }

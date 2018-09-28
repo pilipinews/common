@@ -29,13 +29,9 @@ abstract class Scraper
 
         $charset = (string) 'ASCII//TRANSLIT//IGNORE';
 
-        $encoded = iconv(mb_detect_encoding($body), $charset, $body);
+        $body = iconv(mb_detect_encoding($body), $charset, $body);
 
-        $encoded = str_replace('-- ', '- ', $encoded);
-
-        $encoded = str_replace(' --', ' -', $encoded);
-
-        $body = trim(preg_replace('/\s+/', ' ', $encoded));
+        $body = trim(preg_replace('/\s+/', ' ', $body));
 
         return new Crawler(str_replace('  ', ' ', $body));
     }
