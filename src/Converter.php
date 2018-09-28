@@ -82,12 +82,13 @@ class Converter extends HtmlConverter
         $html = $this->encode('--', '-', $html, false);
         $html = $this->encode('\#', '#', $html);
         $html = $this->encode('\*', '*', $html);
+        $html = $this->encode('\-', '-', $html);
         $html = $this->encode('\_', '_', $html);
         $html = $this->encode('•', '*', $html);
         $html = $this->encode('…', '...', $html);
 
-        $html = $this->encode('\[', '[', $html);
-        $html = $this->encode('\]', ']', $html);
+        $html = $this->encode('\[', '[', (string) $html);
+        $html = $this->encode('\]', ']', (string) $html);
         $html = str_replace(array('“', '”'), '"', $html);
         $html = str_replace(array('’', '‘'), "'", $html);
         $html = str_replace("\n\n\n", "\n\n", $html);
