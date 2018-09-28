@@ -45,11 +45,9 @@ abstract class Scraper
 
         foreach ((array) $removables as $keyword) {
             $html = str_replace($keyword, '', $html);
-
-            $html = str_replace("\n\n\n\n", '', $html);
         }
 
-        return trim(preg_replace('/\s\s+/', "\n\n", $html));
+        return preg_replace('/\s\s+/', "\n\n", $html);
     }
 
     /**
