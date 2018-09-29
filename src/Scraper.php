@@ -41,13 +41,13 @@ abstract class Scraper
     {
         $converter = new Converter;
 
-        $html = $converter->convert($crawler->html());
+        $html = trim($converter->convert($crawler->html()));
 
         foreach ((array) $removables as $keyword) {
             $html = str_replace($keyword, '', $html);
         }
 
-        return preg_replace('/\s\s+/', "\n\n", $html);
+        return trim(preg_replace('/\s\s+/', "\n\n", $html));
     }
 
     /**
