@@ -10,19 +10,19 @@ namespace Pilipinews\Common;
  */
 class Client
 {
-    const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36';
+    const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36';
 
     /**
-     * Performs the HTTP request based on the given URL.
-     *
-     * @param  string $link
-     * @return string
+     * @var resource
      */
-    public static function request($link)
+    protected $curl;
+
+    /**
+     * Initializes the cURL session.
+     */
+    public function __construct()
     {
         $curl = curl_init();
-
-        curl_setopt($curl, CURLOPT_URL, (string) $link);
 
         curl_setopt($curl, CURLOPT_ENCODING, '');
 
@@ -30,8 +30,61 @@ class Client
 
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 
-        ($response = curl_exec($curl)) && curl_close($curl);
+        $this->curl = $curl;
+    }
 
-        return (string) $response;
+    /**
+     * Performs the cURL session.
+     *
+     * @param  boolean $close
+     * @return mixed
+     */
+    public function execute($close = true)
+    {
+        $result = curl_exec($this->curl);
+
+        $close && curl_close($this->curl);
+
+        return $result;
+    }
+
+    /**
+     * Sets an option to the cURL session.
+     *
+     * @param  integer $key
+     * @param  mixed   $value
+     * @return self
+     */
+    public function set($key, $value)
+    {
+        curl_setopt($this->curl, $key, $value);
+
+        return $this;
+    }
+
+    /**
+     * Sets the URL to be used in the cURL session.
+     *
+     * @param  string $link
+     * @return self
+     */
+    public function url($link)
+    {
+        return $this->set(CURLOPT_URL, $link);
+    }
+
+    /**
+     * Performs a new cURL session with an URL.
+     *
+     * @param  string $url
+     * @return string
+     */
+    public static function request($url)
+    {
+        $curl = new static;
+
+        $curl->url((string) $url);
+
+        return $curl->execute();
     }
 }
