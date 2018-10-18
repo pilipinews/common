@@ -61,8 +61,6 @@ class AbsScraper extends Scraper implements ScraperInterface
 
         $article = new Article($title, (string) $html);
 
-        file_put_contents('demo6.html', $article->post());
-
         return $article;
     }
 
