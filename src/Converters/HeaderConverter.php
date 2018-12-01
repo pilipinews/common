@@ -11,7 +11,7 @@ use League\HTMLToMarkdown\ElementInterface;
  * Header Converter
  *
  * @package Pilipinews
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class HeaderConverter implements ConverterInterface, ConfigurationAwareInterface
 {

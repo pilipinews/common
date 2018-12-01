@@ -6,7 +6,7 @@ namespace Pilipinews\Common;
  * Client Test
  *
  * @package Pilipinews
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class ClientTest extends \PHPUnit_Framework_TestCase
 {

@@ -9,7 +9,7 @@ use Pilipinews\Common\Interfaces\ScraperInterface;
  * Collector
  *
  * @package Pilipinews
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class Collector
 {

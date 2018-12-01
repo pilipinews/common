@@ -6,7 +6,7 @@ namespace Pilipinews\Common;
  * Article
  *
  * @package Pilipinews
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class Article
 {
@@ -21,16 +21,24 @@ class Article
     protected $title = '';
 
     /**
+     * @var string
+     */
+    protected $link = '';
+
+    /**
      * Initializes the article instance.
      *
      * @param string $title
      * @param string $body
+     * @param string $link
      */
-    public function __construct($title, $body)
+    public function __construct($title, $body, $link = null)
     {
         $this->body = $body;
 
         $this->title = $title;
+
+        $this->link = $link;
     }
 
     /**
@@ -41,6 +49,16 @@ class Article
     public function body()
     {
         return $this->body;
+    }
+
+    /**
+     * Returns the source link.
+     *
+     * @return string
+     */
+    public function link()
+    {
+        return $this->link;
     }
 
     /**

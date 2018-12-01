@@ -12,7 +12,7 @@ use Symfony\Component\DomCrawler\Crawler;
  * CNN Philippines Scraper
  *
  * @package Pilipinews
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class CnnScraper extends Scraper implements ScraperInterface
 {

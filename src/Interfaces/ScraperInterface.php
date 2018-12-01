@@ -6,7 +6,7 @@ namespace Pilipinews\Common\Interfaces;
  * Scraper Interface
  *
  * @package Pilipinews
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 interface ScraperInterface
 {

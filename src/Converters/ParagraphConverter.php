@@ -9,7 +9,7 @@ use League\HTMLToMarkdown\ElementInterface;
  * Paragraph Converter
  *
  * @package Pilipinews
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class ParagraphConverter implements ConverterInterface
 {

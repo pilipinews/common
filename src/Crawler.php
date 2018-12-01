@@ -8,7 +8,7 @@ use Symfony\Component\DomCrawler\Crawler as DomCrawler;
  * Crawler
  *
  * @package Pilipinews
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class Crawler extends DomCrawler
 {

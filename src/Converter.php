@@ -29,7 +29,7 @@ use Pilipinews\Common\Converters\TableRowConverter;
  * Converter
  *
  * @package Pilipinews
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class Converter extends HtmlConverter
 {

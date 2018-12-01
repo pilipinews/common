@@ -9,7 +9,7 @@ use League\HTMLToMarkdown\ElementInterface;
  * List Block Converter
  *
  * @package Pilipinews
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class ListBlockConverter implements ConverterInterface
 {

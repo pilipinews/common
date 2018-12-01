@@ -11,7 +11,7 @@ use Pilipinews\Common\Scraper;
  * ABS-CBN News Scraper
  *
  * @package Pilipinews
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class AbsScraper extends Scraper implements ScraperInterface
 {

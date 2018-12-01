@@ -11,7 +11,7 @@ use League\HTMLToMarkdown\ElementInterface;
  * Emphasis Converter
  *
  * @package Pilipinews
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class EmphasisConverter implements ConverterInterface, ConfigurationAwareInterface
 {

@@ -29,7 +29,6 @@ $ composer test
 
 ## Credits
 
-- [Rougin Royce Gutib][link-author]
 - [All contributors][link-contributors]
 
 ## License
@@ -43,7 +42,6 @@ The MIT License (MIT). Please see [LICENSE][link-license] for more information.
 [ico-code-quality]: https://img.shields.io/scrutinizer/g/pilipinews/common.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/pilipinews/common.svg?style=flat-square
 
-[link-author]: https://rougin.github.io
 [link-changelog]: https://github.com/pilipinews/common/blob/master/CHANGELOG.md
 [link-code-quality]: https://scrutinizer-ci.com/g/pilipinews/common
 [link-contributors]: https://github.com/pilipinews/common/contributors

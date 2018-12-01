@@ -8,7 +8,7 @@ use Pilipinews\Common\Interfaces\CrawlerInterface;
  * CNN Philippines Crawler
  *
  * @package Pilipinews
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class CnnCrawler implements CrawlerInterface
 {

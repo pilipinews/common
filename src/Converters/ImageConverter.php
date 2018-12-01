@@ -9,7 +9,7 @@ use League\HTMLToMarkdown\ElementInterface;
  * Image Converter
  *
  * @package Pilipinews
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class ImageConverter implements ConverterInterface
 {
@@ -21,6 +21,11 @@ class ImageConverter implements ConverterInterface
      */
     public function convert(ElementInterface $element)
     {
+        if (! $element->getAttribute('src'))
+        {
+            return '';
+        }
+
         return "\n\nPHOTO: " . $element->getAttribute('src') . "\n\n";
     }
 
