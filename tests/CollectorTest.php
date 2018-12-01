@@ -28,7 +28,8 @@ class CollectorTest extends \PHPUnit_Framework_TestCase
 
         $collector = new Collector($crawler, $scraper);
 
-        $callback = function ($article, $link) {
+        $callback = function ($article, $link)
+        {
             return $article;
         };
 

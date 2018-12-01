@@ -43,7 +43,8 @@ abstract class Scraper
 
         $html = trim($converter->convert($crawler->html()));
 
-        foreach ((array) $removables as $keyword) {
+        foreach ((array) $removables as $keyword)
+        {
             $html = str_replace($keyword, '', $html);
         }
 
@@ -73,13 +74,15 @@ abstract class Scraper
      */
     protected function remove($elements)
     {
-        $callback = function ($crawler) {
+        $callback = function ($crawler)
+        {
             $node = $crawler->getNode((integer) 0);
 
             $node->parentNode->removeChild($node);
         };
 
-        foreach ((array) $elements as $removable) {
+        foreach ((array) $elements as $removable)
+        {
             $this->crawler->filter($removable)->each($callback);
         }
     }
@@ -94,7 +97,8 @@ abstract class Scraper
      */
     protected function replace(Crawler $crawler, $element, $callback)
     {
-        $function = function (Crawler $crawler) use ($callback) {
+        $function = function (Crawler $crawler) use ($callback)
+        {
             $node = $crawler->getNode(0);
 
             $html = $node->ownerDocument->saveHtml($node);
@@ -108,7 +112,8 @@ abstract class Scraper
 
         $html = (string) $crawler->html();
 
-        foreach ((array) $items as $item) {
+        foreach ((array) $items as $item)
+        {
             $html = str_replace($item[0], $item[1], $html);
         }
 
@@ -143,7 +148,8 @@ abstract class Scraper
      */
     protected function tweet(Crawler $crawler)
     {
-        $callback = function (Crawler $crawler) {
+        $callback = function (Crawler $crawler)
+        {
             $parsed = (string) $crawler->text();
 
             $text = str_replace('📸: ', '', $parsed);

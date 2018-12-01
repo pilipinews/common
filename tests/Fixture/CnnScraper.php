@@ -87,7 +87,8 @@ class CnnScraper extends Scraper implements ScraperInterface
      */
     protected function video(Crawler $crawler)
     {
-        $callback = function (Crawler $crawler) {
+        $callback = function (Crawler $crawler)
+        {
             $link = (string) $crawler->attr('src');
 
             return '<p>VIDEO: ' . $link . '</p>';

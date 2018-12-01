@@ -48,7 +48,8 @@ class Collector
 
         $articles = array();
 
-        foreach ((array) $items as $item) {
+        foreach ((array) $items as $item)
+        {
             $article = $this->scraper->scrape($item);
 
             $articles[] = $callback($article, $item);

@@ -17,7 +17,8 @@ class TableBlockConverter implements ConverterInterface
     {
         $lines = explode("\n", $element->getValue());
 
-        foreach ($lines as $key => $line) {
+        foreach ($lines as $key => $line)
+        {
             $lines[$key] = trim($lines[$key]);
         }
 

@@ -17,7 +17,8 @@ class TableRowConverter implements ConverterInterface
     {
         $children = array();
 
-        foreach ($element->getChildren() as $item) {
+        foreach ($element->getChildren() as $item)
+        {
             $value = str_replace("\n", ' ', $item->getValue());
 
             $null = $value === ' ' || empty($value);

@@ -32,7 +32,8 @@ class BlockquoteConverter implements ConverterInterface
 
         $total = count((array) $lines);
 
-        foreach ($lines as $i => $line) {
+        foreach ($lines as $i => $line)
+        {
             $markdown .= '> ' . $line . "\n";
 
             $newline = $i + 1 === $total;

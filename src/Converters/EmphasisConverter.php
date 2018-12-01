@@ -42,12 +42,16 @@ class EmphasisConverter implements ConverterInterface, ConfigurationAwareInterfa
 
         $value = $element->getValue();
 
-        if ($tag === 'i' || $tag === 'em') {
+        if ($tag === 'i' || $tag === 'em')
+        {
             $style = $this->config->getOption('italic_style');
-        } else {
+        }
+        else
+        {
             $style = $this->config->getOption('bold_style');
 
-            if (! $this->hasLinks($value)) {
+            if (! $this->hasLinks($value))
+            {
                 $value = mb_convert_case($value, MB_CASE_UPPER, 'UTF-8');
             }
         }

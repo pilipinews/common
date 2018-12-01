@@ -42,7 +42,8 @@ class HeaderConverter implements ConverterInterface, ConfigurationAwareInterface
 
         preg_match($regex, $value = $element->getValue(), $matches);
 
-        if (! isset($matches[0])) {
+        if (! isset($matches[0]))
+        {
             $value = mb_convert_case($value, MB_CASE_UPPER, 'UTF-8');
         }
 
