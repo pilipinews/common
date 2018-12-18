@@ -21,12 +21,12 @@ class ImageConverter implements ConverterInterface
      */
     public function convert(ElementInterface $element)
     {
-        if (! $element->getAttribute('src'))
+        if (! $source = $element->getAttribute('src'))
         {
             return '';
         }
 
-        return "\n\nPHOTO: " . $element->getAttribute('src') . "\n\n";
+        return "\n\nPHOTO: " . $source . "\n\n";
     }
 
     /**

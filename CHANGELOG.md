@@ -7,6 +7,9 @@ All notable changes to `Common` will be documented in this file.
 ### Added
 - `Article::link`
 
+### Fixed
+- Empty images in `ImageConverter::convert`
+
 ## 0.1.0 - 2018-10-04
 
 ### Added
