@@ -48,6 +48,8 @@ abstract class Scraper
             $html = str_replace($keyword, '', $html);
         }
 
+        $html = str_replace('  ', ' ', (string) $html);
+
         return trim(preg_replace('/\s\s+/', "\n\n", $html));
     }
 
