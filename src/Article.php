@@ -28,9 +28,9 @@ class Article
     /**
      * Initializes the article instance.
      *
-     * @param string $title
-     * @param string $body
-     * @param string $link
+     * @param string      $title
+     * @param string      $body
+     * @param string|null $link
      */
     public function __construct($title, $body, $link = null)
     {
