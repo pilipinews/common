@@ -1,15 +1,15 @@
 {
     "name": "pilipinews/common",
     "description": "Abstractions and interfaces for Pilipinews packages.",
-    "homepage": "https://pilipinews.github.io",
+    "homepage": "https://pilipinews.github.io/",
     "license": "MIT",
     "authors":
     [
         {
-            "name": "Rougin Gutib",
             "email": "rougingutib@gmail.com",
             "homepage": "https://rougin.github.io",
-            "role": "Developer"
+            "name": "Rougin Gutib",
+            "role": "Software Engineer"
         }
     ],
     "require":
