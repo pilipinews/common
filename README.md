@@ -7,7 +7,7 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-Abstractions and interfaces for [Pilipinews](https://pilipinews.github.io/) packages.
+Abstractions and interfaces for [Pilipinews](https://pilipinews.com/) packages.
 
 ## Installation
 
