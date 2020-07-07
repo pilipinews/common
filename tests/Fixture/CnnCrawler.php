@@ -21,7 +21,7 @@ class CnnCrawler implements CrawlerInterface
     {
         $items = array();
 
-        $items[] = 'http://cnnphilippines.com/news/2018/09/11/AFP-tank-sightings-EDSA.html';
+        $items[] = 'https://cnnphilippines.com/news/2018/09/11/AFP-tank-sightings-EDSA.html';
 
         return $items;
     }

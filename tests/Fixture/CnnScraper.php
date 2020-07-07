@@ -19,7 +19,7 @@ class CnnScraper extends Scraper implements ScraperInterface
     /**
      * @var string[]
      */
-    protected $removables = array('p > script');
+    protected $removables = array('p > script', '.flourish-credit');
 
     /**
      * @var string[]
@@ -27,6 +27,7 @@ class CnnScraper extends Scraper implements ScraperInterface
     protected $reload = array(
         'Please click the source link below for more updates.',
         'Please refresh for updates.',
+        'Please refresh the page for updates.',
         'Please refresh this page for updates.',
         'Refresh this page for more updates.',
     );
@@ -41,11 +42,11 @@ class CnnScraper extends Scraper implements ScraperInterface
     {
         $this->prepare((string) $link);
 
-        $this->remove($this->removables);
+        $title = $this->title('.title');
 
-        $title = $this->title('title', ' - CNN Philippines');
+        $body = $this->body('.article-maincontent-p');
 
-        $body = $this->body('#content-body');
+        $body = $this->image($body);
 
         $body = $this->video($this->tweet($body));
 
@@ -57,41 +58,51 @@ class CnnScraper extends Scraper implements ScraperInterface
 
         $html = preg_replace($search, $replace, $html);
 
-        return new Article($title, (string) $html);
+        return new Article($title, $html, $link);
     }
 
     /**
-     * Initializes the crawler instance.
+     * Converts image elements into a readable string.
      *
-     * @param  string $link
-     * @return void
+     * @param  \Symfony\Component\DomCrawler\Crawler $crawler
+     * @return \Symfony\Component\DomCrawler\Crawler
      */
-    protected function prepare($link)
+    protected function image(Crawler $crawler)
     {
-        $pattern = '/content-body-[0-9]+(-[0-9]+)+/i';
+        $callback = function (Crawler $crawler, $html)
+        {
+            $base = 'https://cnnphilippines.com';
 
-        $html = Client::request($link);
+            $link = $crawler->filter('img')->attr('src');
 
-        preg_match($pattern, $html, $matches);
+            $caption = $crawler->filter('.picture-caption');
 
-        $html = str_replace($matches[0], 'content-body', $html);
+            if ($text = $caption->first()->text())
+            {
+                $text = ' - ' . $text;
+            }
 
-        $this->crawler = new Crawler($html);
+            return '<p>PHOTO: ' . $base . $link . $text . '</p>';
+        };
+
+        return $this->replace($crawler, '.img-container.picture', $callback);
     }
 
     /**
      * Converts video elements to readable string.
      *
-     * @param  \Symfony\Component\DomCrawler\Crawler $crawler
-     * @return \Symfony\Component\DomCrawler\Crawler
+     * @param  \Pilipinews\Common\Crawler $crawler
+     * @return \Pilipinews\Common\Crawler
      */
     protected function video(Crawler $crawler)
     {
         $callback = function (Crawler $crawler)
         {
-            $link = (string) $crawler->attr('src');
+            $embed = strpos($link = $crawler->attr('src'), 'embed');
 
-            return '<p>VIDEO: ' . $link . '</p>';
+            $type = $embed !== false ? 'EMBED' : 'VIDEO';
+
+            return '<p>' . $type . ': ' . $link . '</p><br><br><br>';
         };
 
         return $this->replace($crawler, 'p > iframe', $callback);

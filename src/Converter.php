@@ -94,6 +94,8 @@ class Converter extends HtmlConverter
         $html = str_replace("\n\n\n", "\n\n", $html);
         $html = str_replace("\n ", "\n", (string) $html);
 
+        $html = htmlspecialchars_decode($html);
+
         return str_replace('\.', '.', (string) $html);
     }
 
